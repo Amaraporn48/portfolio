@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Noto+Serif+Thai:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant Garamond", "Noto Serif Thai", serif;
+  --font-serif: "Noto Serif Thai", "Cormorant Garamond", serif;
+  --font-sans: "Segoe UI", system-ui, sans-serif;
+
+  --color-ivory: #faf7f2;
+  --color-cream: #f3ede3;
+  --color-ink: #1c1917;
+  --color-stone: #6f6760;
+  --color-line: #e2d9cc;
+  --color-rose: #b5687a;
+  --color-blush: #ecc4cb;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, rgba(236, 196, 203, 0.35), transparent 22%),
+    linear-gradient(180deg, #f9f4ef 0%, #f4efe8 100%);
+  color: var(--color-ink);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-weight: 300;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-thai,
+.font-thai h1,
+.font-thai h2,
+.font-thai h3,
+.font-thai p,
+.font-thai span,
+.font-thai a,
+.font-thai li,
+.font-thai button {
+  font-family: "Noto Sans Thai", "Segoe UI", sans-serif;
+}
+
+.font-thai h1,
+.font-thai h2,
+.font-thai h3 {
+  font-family: "Noto Serif Thai", "Noto Sans Thai", serif;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::selection {
+  background: var(--color-blush);
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-rose);
+}
+
+.hairline {
+  height: 1px;
+  background: var(--color-line);
+}
+
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s ease;
+}
+.link-underline:hover,
+.link-underline.active {
+  background-size: 100% 1px;
+}
+
+.fade-up {
+  animation: fadeUp 0.9s ease both;
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-up { animation: none; }
+}
+
+:focus-visible {
+  outline: 1px solid var(--color-rose);
+  outline-offset: 4px;
+}

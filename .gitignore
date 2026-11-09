@@ -1,0 +1,23 @@
+# dependencies & build output
+node_modules
+dist
+
+# vite cache
+.vite
+
+# secrets / env
+.env
+.env.*
+*.pem
+*.key
+
+# logs & OS files
+*.log
+npm-debug.log*
+.DS_Store
+
+# tool state
+.omc
+
+# source PDF (22 MB, not needed to build the site)
+assets/*.pdf
