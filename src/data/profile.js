@@ -6,7 +6,7 @@ export const profile = {
   tagline: 'กลยุทธ์การตลาด · การวิเคราะห์ข้อมูล · การสร้างเว็บไซต์',
   intro:
     'ผลงานที่ผสานการวิเคราะห์ตลาดอย่างเป็นระบบ เข้ากับการนำเสนอและการลงมือสร้างจริง ตั้งแต่การออกแบบกลยุทธ์แบรนด์ การพยากรณ์ด้วยข้อมูล ไปจนถึงการสร้างเว็บไซต์',
-  photo: '/images/portrait.jpg',
+  photo: `${import.meta.env.BASE_URL}images/portrait.jpg`,
   contact: {
     email: 'suepwongchai@gmail.com',
     phone: '080-053-9005',

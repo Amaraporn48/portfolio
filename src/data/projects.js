@@ -1,4 +1,4 @@
-const img = (name, alt) => ({ src: `/images/${name}.jpg`, alt })
+const img = (name, alt) => ({ src: `${import.meta.env.BASE_URL}images/${name}.jpg`, alt })
 
 export const projects = [
   {
