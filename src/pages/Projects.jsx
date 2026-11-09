@@ -19,18 +19,33 @@ export default function Projects() {
         </p>
       </header>
 
-      <div className="mt-12 rounded-[2rem] border border-line bg-ivory p-6 shadow-[0_18px_40px_rgba(28,25,23,0.04)]">
-        <p className="eyebrow">Internship Web Projects</p>
-        <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-12 rounded-[2.5rem] border border-[#eed0d7] bg-gradient-to-br from-[#fbf2f4] via-[#f8e7ec] to-[#f4dde4] p-7 sm:p-10 shadow-[0_20px_50px_rgba(236,196,203,0.3)]">
+        <p className="eyebrow text-rose">Internship Web Projects</p>
+        <h2 className="mt-2 font-display text-3xl sm:text-4xl text-ink">โปรเจกต์ฝึกงานและผลงานจริง</h2>
+        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {internshipProjects.map((p) => (
-            <a key={p.slug} href={p.link} target="_blank" rel="noreferrer" className="group rounded-[1.25rem] border border-line bg-white p-3 transition hover:-translate-y-1 hover:border-rose">
-              <div className="aspect-[16/10] overflow-hidden rounded-[0.9rem] bg-cream">
-                <img src={p.cover.src} alt={p.cover.alt} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+            <a
+              key={p.slug}
+              href={p.link}
+              target="_blank"
+              rel="noreferrer"
+              className="group block rounded-[1.5rem] border border-white/80 bg-white/95 p-3.5 backdrop-blur shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-rose/50 hover:bg-white hover:shadow-[0_16px_36px_rgba(181,104,122,0.18)]"
+            >
+              <div className="aspect-[16/10] overflow-hidden rounded-[1rem] border border-black/5 bg-cream/70">
+                <img
+                  src={p.cover.src}
+                  alt={p.cover.alt}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                />
               </div>
-              <div className="mt-4">
-                <p className="text-[10px] uppercase tracking-[0.18em] text-stone">{p.category}</p>
-                <h3 className="mt-2 font-serif text-xl">{p.title}</h3>
-                <p className="mt-2 text-sm text-stone">{p.summary}</p>
+              <div className="mt-4 px-1 pb-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] uppercase tracking-[0.18em] text-stone">{p.category}</span>
+                  <span className="text-xs text-rose font-medium group-hover:underline">Visit Site →</span>
+                </div>
+                <h3 className="mt-2 font-serif text-xl text-ink group-hover:text-rose transition">{p.title}</h3>
+                <p className="mt-2 text-sm text-stone line-clamp-2">{p.summary}</p>
               </div>
             </a>
           ))}

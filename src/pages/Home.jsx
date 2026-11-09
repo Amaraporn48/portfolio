@@ -84,19 +84,28 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="internships" className="bg-ink py-24 text-ivory scroll-mt-28">
-        <div className="mx-auto max-w-6xl px-6">
+      <section id="internships" className="mx-auto max-w-6xl scroll-mt-28 px-6 py-16 sm:py-20">
+        <div className="rounded-[3rem] border border-[#eed0d7] bg-gradient-to-br from-[#fbf2f4] via-[#f7e7ec] to-[#f4dde4] p-8 sm:p-12 lg:p-14 shadow-[0_24px_60px_-15px_rgba(236,196,203,0.35)]">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="font-thai">
-              <p className="eyebrow text-blush">Internship Projects</p>
-              <h2 className="mt-4 font-display text-4xl leading-tight sm:text-5xl text-ivory">โปรเจกต์ฝึกงานและผลงานจริง</h2>
+              <p className="eyebrow text-rose">Internship Projects</p>
+              <h2 className="mt-3 font-display text-4xl leading-tight sm:text-5xl text-ink">โปรเจกต์ฝึกงานและผลงานจริง</h2>
+              <p className="mt-3 max-w-2xl text-sm text-stone font-thai">
+                รวมโปรเจกต์พัฒนาเว็บไซต์องค์กรและระบบงานจริงที่พัฒนาขึ้นในระหว่างการฝึกงาน
+              </p>
             </div>
           </div>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {showcase.map((p) => (
-              <a key={p.slug} href={p.link} target="_blank" rel="noreferrer" className="group block rounded-[1.5rem] border border-white/10 bg-white/5 p-3 transition hover:-translate-y-1 hover:border-blush/60">
-                <div className="aspect-[4/3] overflow-hidden rounded-[1rem] bg-cream">
+              <a
+                key={p.slug}
+                href={p.link}
+                target="_blank"
+                rel="noreferrer"
+                className="group block rounded-[1.75rem] border border-white/80 bg-white/95 p-3.5 backdrop-blur shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-rose/50 hover:bg-white hover:shadow-[0_16px_36px_rgba(181,104,122,0.18)]"
+              >
+                <div className="aspect-[4/3] overflow-hidden rounded-[1.25rem] border border-black/5 bg-cream/70">
                   <img
                     src={p.cover.src}
                     alt={p.cover.alt}
@@ -104,11 +113,22 @@ export default function Home() {
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
                 </div>
-                <div className="mt-4 px-2 pb-2 font-thai">
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-blush">{p.year}</p>
-                  <h3 className="mt-2 font-display text-2xl text-ivory">{p.title}</h3>
-                  <p className="mt-2 text-sm text-ivory/70">{p.summary}</p>
-                  <div className="mt-4 inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-blush">
+                <div className="mt-4 px-1.5 pb-2 font-thai">
+                  <div className="flex items-center justify-between">
+                    <span className="rounded-full bg-cream px-2.5 py-0.5 text-[10px] font-medium tracking-[0.16em] uppercase text-stone">
+                      {p.year}
+                    </span>
+                    <span className="text-[11px] font-medium text-rose">
+                      {p.category}
+                    </span>
+                  </div>
+                  <h3 className="mt-2.5 font-display text-2xl text-ink transition group-hover:text-rose">
+                    {p.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-stone line-clamp-3">
+                    {p.summary}
+                  </p>
+                  <div className="mt-4 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.14em] text-rose transition-all group-hover:gap-3">
                     Visit Site <span aria-hidden="true">→</span>
                   </div>
                 </div>
