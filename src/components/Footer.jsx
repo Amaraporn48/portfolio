@@ -1,8 +1,16 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { profile } from '../data/profile.js'
 import { navItems } from './Header.jsx'
 
 export default function Footer() {
+  const location = useLocation()
+
+  const handleNavClick = (to) => {
+    if (location.pathname === to) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+    }
+  }
+
   return (
     <footer className="mt-24 border-t border-line">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-14 md:flex-row md:items-end md:justify-between">
@@ -12,7 +20,12 @@ export default function Footer() {
         </div>
         <nav aria-label="เมนูท้ายหน้า" className="flex flex-wrap gap-x-8 gap-y-2 text-sm text-stone">
           {navItems.map((n) => (
-            <Link key={n.to} to={n.to} className="hover:text-ink">
+            <Link
+              key={n.to}
+              to={n.to}
+              onClick={() => handleNavClick(n.to)}
+              className="transition hover:text-ink"
+            >
               {n.label}
             </Link>
           ))}

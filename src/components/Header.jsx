@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { profile } from '../data/profile.js'
 
 export const navItems = [
-  { href: '#top', label: 'หน้าแรก' },
-  { href: '#about', label: 'เกี่ยวกับฉัน' },
-  { href: '#projects', label: 'ผลงาน' },
-  { href: '#contact', label: 'ติดต่อ' },
+  { to: '/', label: 'หน้าแรก' },
+  { to: '/about', label: 'เกี่ยวกับฉัน' },
+  { to: '/projects', label: 'ผลงาน' },
+  { to: '/contact', label: 'ติดต่อ' },
 ]
 
 export default function Header() {
   const [open, setOpen] = useState(false)
+  const location = useLocation()
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
@@ -19,31 +20,38 @@ export default function Header() {
     }
   }, [open])
 
-  const handleScroll = (event, href) => {
-    if (href === '#top') {
-      return
+  const handleNavClick = (to) => {
+    setOpen(false)
+    if (location.pathname === to) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     }
-
-    event.preventDefault()
-    const target = document.querySelector(href)
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-    window.history.replaceState(null, '', href)
   }
 
   return (
-    <header id="top" className="sticky top-0 z-40 border-b border-line/70 bg-ivory/90 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-line/70 bg-ivory/90 backdrop-blur">
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
-        <Link to="/" onClick={() => setOpen(false)} className="font-display text-xl tracking-[0.04em] sm:text-2xl">
+        <Link
+          to="/"
+          onClick={() => handleNavClick('/')}
+          className="font-display text-xl tracking-[0.04em] sm:text-2xl"
+        >
           {profile.nameEn}
         </Link>
 
         <nav aria-label="เมนูหลัก" className="hidden gap-10 md:flex">
           {navItems.map((n) => (
-            <a key={n.href} href={n.href} onClick={(event) => handleScroll(event, n.href)} className="link-underline pb-1 text-[0.85rem] tracking-[0.08em] text-stone hover:text-ink">
+            <NavLink
+              key={n.to}
+              to={n.to}
+              onClick={() => handleNavClick(n.to)}
+              className={({ isActive }) =>
+                `link-underline pb-1 text-[0.85rem] tracking-[0.08em] transition ${
+                  isActive ? 'text-ink font-medium' : 'text-stone hover:text-ink'
+                }`
+              }
+            >
               {n.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
 
@@ -66,18 +74,19 @@ export default function Header() {
           className="fixed inset-x-0 top-20 bottom-0 z-30 flex flex-col gap-2 bg-ivory px-6 pt-10 md:hidden"
         >
           {navItems.map((n, i) => (
-            <a
-              key={n.href}
-              href={n.href}
-              onClick={(event) => {
-                setOpen(false)
-                handleScroll(event, n.href)
-              }}
-              className="border-b border-line py-5 font-serif text-2xl text-ink"
+            <NavLink
+              key={n.to}
+              to={n.to}
+              onClick={() => handleNavClick(n.to)}
+              className={({ isActive }) =>
+                `border-b border-line py-5 font-serif text-2xl transition ${
+                  isActive ? 'text-rose font-medium' : 'text-ink'
+                }`
+              }
             >
               <span className="mr-4 font-sans text-xs tracking-widest text-stone">0{i + 1}</span>
               {n.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
       )}

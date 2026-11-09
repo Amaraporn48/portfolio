@@ -9,7 +9,7 @@ const showcase = internshipProjects
 export default function Home() {
   return (
     <>
-      <section className="mx-auto grid max-w-6xl items-center gap-12 px-6 pt-16 pb-20 md:grid-cols-12 md:pt-24">
+      <section id="home" className="mx-auto grid max-w-6xl items-center gap-12 px-6 pt-16 pb-20 md:grid-cols-12 md:pt-24">
         <div className="fade-up order-2 md:order-1 md:col-span-7">
           <p className="eyebrow">Portfolio</p>
           <h1 className="mt-6 font-display text-5xl leading-[1.05] sm:text-7xl">
