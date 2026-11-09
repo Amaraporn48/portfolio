@@ -1,12 +1,19 @@
+import { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { profile, skills } from '../data/profile.js'
 import { internshipProjects, projects } from '../data/projects.js'
 import SectionTitle from '../components/SectionTitle.jsx'
+import ProjectBlock from '../components/ProjectBlock.jsx'
+import Lightbox from '../components/Lightbox.jsx'
 
-const featured = projects.filter((p) => ['blushy-babe', 'durian-export', 'homklinlamune'].includes(p.slug))
 const showcase = internshipProjects
 
 export default function Home() {
+  const [box, setBox] = useState({ images: [], index: null })
+  const open = useCallback((images, index) => setBox({ images, index }), [])
+  const close = useCallback(() => setBox((b) => ({ ...b, index: null })), [])
+  const change = useCallback((index) => setBox((b) => ({ ...b, index })), [])
+
   return (
     <>
       <section id="home" className="mx-auto grid max-w-6xl items-center gap-12 px-6 pt-16 pb-20 md:grid-cols-12 md:pt-24">
@@ -52,31 +59,28 @@ export default function Home() {
 
       <div className="hairline mx-auto max-w-6xl" />
 
-      <section id="about" className="mx-auto max-w-6xl scroll-mt-28 px-6 py-24">
+      {/* รายการผลงานทั้งหมดแบบละเอียด (รูปหลัก + รูปย่อย + คำอธิบายครบทุกชิ้น) */}
+      <section id="projects" className="mx-auto max-w-6xl scroll-mt-28 px-6 py-24">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionTitle eyebrow="Selected Works" title="ผลงานเด่น" />
+          <SectionTitle eyebrow="Projects & Case Studies" title="ผลงาน" />
         </div>
 
-        <div className="mt-14 grid gap-10 md:grid-cols-3">
-          {featured.map((p) => (
-            <Link key={p.slug} to={`/projects#${p.slug}`} className="group block">
-              <div className="aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-cream">
-                <img
-                  src={p.cover.src}
-                  alt={p.cover.alt}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                />
-              </div>
-              <p className="eyebrow mt-5">{p.category}</p>
-              <h3 className="mt-2 font-thai font-display text-2xl">{p.title}</h3>
-              <p className="mt-2 font-thai text-sm text-stone">{p.summary}</p>
-            </Link>
+        <nav aria-label="ทางลัดไปยังผลงาน" className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-stone">
+          {projects.map((p) => (
+            <a key={p.slug} href={`#${p.slug}`} className="link-underline pb-0.5 hover:text-ink">
+              {p.title}
+            </a>
+          ))}
+        </nav>
+
+        <div className="mt-16 divide-y divide-line border-t border-line pt-16">
+          {projects.map((p, i) => (
+            <ProjectBlock key={p.slug} project={p} no={i + 1} onOpen={open} />
           ))}
         </div>
       </section>
 
-      <section id="projects" className="bg-ink py-24 text-ivory scroll-mt-28">
+      <section id="internships" className="bg-ink py-24 text-ivory scroll-mt-28">
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="font-thai">
@@ -151,6 +155,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Lightbox images={box.images} index={box.index} onClose={close} onChange={change} />
     </>
   )
 }

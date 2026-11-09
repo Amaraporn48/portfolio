@@ -20,8 +20,27 @@ export default function Header() {
     }
   }, [open])
 
-  const handleNavClick = (to) => {
+  const handleNavClick = (event, to) => {
     setOpen(false)
+    if (location.pathname === '/') {
+      if (to === '/projects') {
+        event.preventDefault()
+        const el = document.getElementById('projects')
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          window.history.replaceState(null, '', '#projects')
+          return
+        }
+      } else if (to === '/contact') {
+        event.preventDefault()
+        const el = document.getElementById('contact')
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          window.history.replaceState(null, '', '#contact')
+          return
+        }
+      }
+    }
     if (location.pathname === to) {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     }
@@ -32,7 +51,7 @@ export default function Header() {
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
         <Link
           to="/"
-          onClick={() => handleNavClick('/')}
+          onClick={(e) => handleNavClick(e, '/')}
           className="font-display text-xl tracking-[0.04em] sm:text-2xl"
         >
           {profile.nameEn}
@@ -43,7 +62,7 @@ export default function Header() {
             <NavLink
               key={n.to}
               to={n.to}
-              onClick={() => handleNavClick(n.to)}
+              onClick={(e) => handleNavClick(e, n.to)}
               className={({ isActive }) =>
                 `link-underline pb-1 text-[0.85rem] tracking-[0.08em] transition ${
                   isActive ? 'text-ink font-medium' : 'text-stone hover:text-ink'
@@ -77,7 +96,7 @@ export default function Header() {
             <NavLink
               key={n.to}
               to={n.to}
-              onClick={() => handleNavClick(n.to)}
+              onClick={(e) => handleNavClick(e, n.to)}
               className={({ isActive }) =>
                 `border-b border-line py-5 font-serif text-2xl transition ${
                   isActive ? 'text-rose font-medium' : 'text-ink'

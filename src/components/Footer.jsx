@@ -5,7 +5,26 @@ import { navItems } from './Header.jsx'
 export default function Footer() {
   const location = useLocation()
 
-  const handleNavClick = (to) => {
+  const handleNavClick = (event, to) => {
+    if (location.pathname === '/') {
+      if (to === '/projects') {
+        event.preventDefault()
+        const el = document.getElementById('projects')
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          window.history.replaceState(null, '', '#projects')
+          return
+        }
+      } else if (to === '/contact') {
+        event.preventDefault()
+        const el = document.getElementById('contact')
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          window.history.replaceState(null, '', '#contact')
+          return
+        }
+      }
+    }
     if (location.pathname === to) {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     }
@@ -23,7 +42,7 @@ export default function Footer() {
             <Link
               key={n.to}
               to={n.to}
-              onClick={() => handleNavClick(n.to)}
+              onClick={(e) => handleNavClick(e, n.to)}
               className="transition hover:text-ink"
             >
               {n.label}
