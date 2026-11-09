@@ -65,15 +65,19 @@ export default function Home() {
           <SectionTitle eyebrow="Projects & Case Studies" title="ผลงาน" />
         </div>
 
-        <nav aria-label="ทางลัดไปยังผลงาน" className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-stone">
-          {projects.map((p) => (
-            <a key={p.slug} href={`#${p.slug}`} className="link-underline pb-0.5 hover:text-ink">
-              {p.title}
+        <nav aria-label="ทางลัดไปยังผลงาน" className="mt-8 flex flex-wrap gap-2 text-xs text-stone">
+          {projects.map((p, i) => (
+            <a
+              key={p.slug}
+              href={`#${p.slug}`}
+              className="rounded-full border border-line bg-white/70 px-4 py-2 font-thai transition hover:border-rose hover:bg-white hover:text-rose"
+            >
+              <span className="font-display font-medium text-rose mr-1">0{i + 1}</span> {p.title}
             </a>
           ))}
         </nav>
 
-        <div className="mt-16 divide-y divide-line border-t border-line pt-16">
+        <div className="mt-12 space-y-12 sm:space-y-16">
           {projects.map((p, i) => (
             <ProjectBlock key={p.slug} project={p} no={i + 1} onOpen={open} />
           ))}
